@@ -126,6 +126,26 @@
             color: white;
         }
         
+        .calendar-day.logged-meditation {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .calendar-day.logged-creative-meditation {
+            background: linear-gradient(135deg, var(--primary-color) 50%, #9b59b6 50%);
+            color: white;
+        }
+        
+        .calendar-day.logged-workout-meditation {
+            background: linear-gradient(135deg, var(--success-color) 50%, #9b59b6 50%);
+            color: white;
+        }
+        
+        .calendar-day.logged-all {
+            background: linear-gradient(135deg, var(--primary-color) 33%, var(--success-color) 33%, var(--success-color) 66%, #9b59b6 66%);
+            color: white;
+        }
+        
         .calendar-day.today {
             border: 2px solid var(--secondary-color);
         }
@@ -187,10 +207,20 @@
         
         .button.workout {
             background-color: var(--success-color);
+            color: white;
         }
         
         .button.workout:hover {
             background-color: #219653;
+        }
+        
+        .button.meditation {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .button.meditation:hover {
+            background-color: #8e44ad;
         }
         
         .modal {
@@ -293,7 +323,11 @@
         }
         
         .workout {
-            color: "white";
+            color: var(--success-color);
+        }
+        
+        .meditation {
+            color: #9b59b6;
         }
         
         .month-navigation {
@@ -389,10 +423,15 @@
                     <h3>Workout Streak</h3>
                     <div class="value" id="workout-streak">0</div>
                 </div>
+                <div class="stat-box">
+                    <h3>Meditation Streak</h3>
+                    <div class="value" id="meditation-streak">0</div>
+                </div>
             </div>
             
             <button class="button" id="log-creative">Log Creative Session</button>
             <button class="button workout" id="log-workout">Log Workout</button>
+            <button class="button meditation" id="log-meditation">Log Meditation</button>
             <button class="install-button" id="install-button">Install App</button>
         </div>
         
@@ -413,6 +452,10 @@
                     <h3>Total Workouts</h3>
                     <div class="value" id="total-workout">0</div>
                 </div>
+                <div class="stat-box">
+                    <h3>Total Meditations</h3>
+                    <div class="value" id="total-meditation">0</div>
+                </div>
             </div>
             
             <div class="streak-stats">
@@ -424,6 +467,10 @@
                     <h3>Longest Workout Streak</h3>
                     <div class="value" id="longest-workout">0</div>
                 </div>
+                <div class="stat-box">
+                    <h3>Longest Meditation Streak</h3>
+                    <div class="value" id="longest-meditation">0</div>
+                </div>
             </div>
             
             <div class="streak-stats">
@@ -434,6 +481,10 @@
                 <div class="stat-box">
                     <h3>Average Workout Time</h3>
                     <div class="value" id="avg-workout">0 min</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Average Meditation Time</h3>
+                    <div class="value" id="avg-meditation">0 min</div>
                 </div>
             </div>
         </div>
@@ -487,6 +538,7 @@
             const nextMonthBtn = document.getElementById('next-month');
             const logCreativeBtn = document.getElementById('log-creative');
             const logWorkoutBtn = document.getElementById('log-workout');
+            const logMeditationBtn = document.getElementById('log-meditation');
             const createModal = document.getElementById('create-modal');
             const modalTitle = document.getElementById('modal-title');
             const durationInput = document.getElementById('duration');
@@ -500,12 +552,16 @@
             // Stats
             const creativeStreakEl = document.getElementById('creative-streak');
             const workoutStreakEl = document.getElementById('workout-streak');
+            const meditationStreakEl = document.getElementById('meditation-streak');
             const totalCreativeEl = document.getElementById('total-creative');
             const totalWorkoutEl = document.getElementById('total-workout');
+            const totalMeditationEl = document.getElementById('total-meditation');
             const longestCreativeEl = document.getElementById('longest-creative');
             const longestWorkoutEl = document.getElementById('longest-workout');
+            const longestMeditationEl = document.getElementById('longest-meditation');
             const avgCreativeEl = document.getElementById('avg-creative');
             const avgWorkoutEl = document.getElementById('avg-workout');
+            const avgMeditationEl = document.getElementById('avg-meditation');
             
             // Tab Navigation
             tabs.forEach(tab => {
@@ -567,13 +623,23 @@
                     const dateStr = formatDate(currentDate);
                     const hasCreative = activities.some(a => a.type === 'creative' && a.date === dateStr);
                     const hasWorkout = activities.some(a => a.type === 'workout' && a.date === dateStr);
+                    const hasMeditation = activities.some(a => a.type === 'meditation' && a.date === dateStr);
                     
-                    if (hasCreative && hasWorkout) {
+                    // Determine which class to add based on combinations of activities
+                    if (hasCreative && hasWorkout && hasMeditation) {
+                        dayEl.classList.add('logged-all');
+                    } else if (hasCreative && hasWorkout) {
                         dayEl.classList.add('logged-both');
+                    } else if (hasCreative && hasMeditation) {
+                        dayEl.classList.add('logged-creative-meditation');
+                    } else if (hasWorkout && hasMeditation) {
+                        dayEl.classList.add('logged-workout-meditation');
                     } else if (hasCreative) {
                         dayEl.classList.add('logged-creative');
                     } else if (hasWorkout) {
                         dayEl.classList.add('logged-workout');
+                    } else if (hasMeditation) {
+                        dayEl.classList.add('logged-meditation');
                     }
                     
                     // Add click event to show/add activities for this day
@@ -610,6 +676,14 @@
                 modalTitle.textContent = 'Log Workout';
                 currentActivityType = 'workout';
                 durationInput.value = '30';
+                notesInput.value = '';
+                createModal.style.display = 'flex';
+            });
+            
+            logMeditationBtn.addEventListener('click', () => {
+                modalTitle.textContent = 'Log Meditation';
+                currentActivityType = 'meditation';
+                durationInput.value = '10'; // Default meditation time shorter
                 notesInput.value = '';
                 createModal.style.display = 'flex';
             });
@@ -687,9 +761,18 @@
                         minute: '2-digit'
                     });
                     
+                    let activityName = '';
+                    if (activity.type === 'creative') {
+                        activityName = 'Creative Session';
+                    } else if (activity.type === 'workout') {
+                        activityName = 'Workout';
+                    } else if (activity.type === 'meditation') {
+                        activityName = 'Meditation';
+                    }
+                    
                     item.innerHTML = `
                         <div class="date">${dateStr} at ${timeStr}</div>
-                        <div class="activity ${activity.type}">${activity.type === 'creative' ? 'Creative Session' : 'Workout'}</div>
+                        <div class="activity ${activity.type}">${activityName}</div>
                         <div class="duration">${activity.duration} minutes</div>
                         ${activity.notes ? `<div class="notes">${activity.notes}</div>` : ''}
                     `;
@@ -702,14 +785,17 @@
             function updateStats() {
                 const creativeActivities = activities.filter(a => a.type === 'creative');
                 const workoutActivities = activities.filter(a => a.type === 'workout');
+                const meditationActivities = activities.filter(a => a.type === 'meditation');
                 
                 // Total counts
                 totalCreativeEl.textContent = creativeActivities.length;
                 totalWorkoutEl.textContent = workoutActivities.length;
+                totalMeditationEl.textContent = meditationActivities.length;
                 
                 // Longest streaks
                 longestCreativeEl.textContent = calculateLongestStreak('creative');
                 longestWorkoutEl.textContent = calculateLongestStreak('workout');
+                longestMeditationEl.textContent = calculateLongestStreak('meditation');
                 
                 // Average durations
                 if (creativeActivities.length > 0) {
@@ -721,12 +807,18 @@
                     const avgWorkout = workoutActivities.reduce((sum, a) => sum + a.duration, 0) / workoutActivities.length;
                     avgWorkoutEl.textContent = Math.round(avgWorkout) + ' min';
                 }
+                
+                if (meditationActivities.length > 0) {
+                    const avgMeditation = meditationActivities.reduce((sum, a) => sum + a.duration, 0) / meditationActivities.length;
+                    avgMeditationEl.textContent = Math.round(avgMeditation) + ' min';
+                }
             }
             
             // Calculate current streaks
             function updateStreaks() {
                 creativeStreakEl.textContent = calculateCurrentStreak('creative');
                 workoutStreakEl.textContent = calculateCurrentStreak('workout');
+                meditationStreakEl.textContent = calculateCurrentStreak('meditation');
             }
             
             function calculateCurrentStreak(type) {
