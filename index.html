@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3498db">
+    <title>Habit Streak Tracker</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkhhYml0IFN0cmVhayBUcmFja2VyIiwKICAic2hvcnRfbmFtZSI6ICJTdHJlYWtUcmFja2VyIiwKICAic3RhcnRfdXJsIjogIi4vaW5kZXguaHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzNjYWFmZiIsCiAgInRoZW1lX2NvbG9yIjogIiMzNDk4ZGIiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSEJ5WlhObGNuWmxRWE53WldOMFVtRjBhVzg5SW5oTmFXNVpUV2x1SUcxbFpYUWlJSFpwWlhkQ2IzZzlJakFnTUNBek5UQWdNelV3SWo0OGMzUjViR1UrTG1KaGMyVWdleUJtYVd4c09pQjNhR2wwWlRzZ1ptOXVkQzFtWVcxcGJIazZJSE5oYm5NdGMyVnlhV1k3SUgwOEwzTjBlV3hsUGp4eVpXTjBJSGRwWkhSb1BTSXhNREFsSWlCb1pXbG5hSFE5SWpFd01DVWlJR1pwYkd3OUltSnNZV05ySWlBdlBqeDBaWGgwSUhnOUlqRXdJaUI1UFNJME1DSWdZMnhoYzNNOUltSmhjMlVpUGxOMGNtVmhhMEZ3Y0R3dmRHVjRkRDQ4ZEdWNGRDQjRQU0l4TUNJZ2VUMGlNakFpSUdOc1lYTnpQU0ppWVhObElpQnRaWFJoTFdGdWFXMWhkR2x2Ymowa1ltOXlaR1Z5TFhKaFpHbDFjMWxsYzNSdlJtRmtaU0lnWTNnOUlqRXdNQ1VpSUdONVBTSXhNREFsSWlCeVBTSXlOU1VpUGp4bWFXeHNJSGc5SWpFd0lpQjVQU0l5TUNJZ1kyeGhjM005SW1KaGMyVWlJR05vYVd4a0lEMGlJMk0wWTJNd1lTSWdXbTlsYlQwaU1qa2lJRjl0YVc1aGVWOXBibU4wUFNJNE1DSWdjbWs5SWpFd0lpQndZV2RsUFNJeElpQnpiR2x0ZEhWc2FXNWZjbUYwYVc4OUlqRXZNU0lnYVc1dGIyUnBabWxsZEQwaWJXRnpkR1Z5SWlCeVlXUnBkWE5mY21GMGFXODlJak14SWlBdlBqeG1hV3hzSUhnOUlqRXdJaUI1UFNJMk1DSWdZMnhoYzNNOUltSmhjMlVpSUdOb2FXeGtJRDBpSTJNMFkyTXdZU0lnV205bGJUMGlNamtpSUY5dGFXNWhZMXB0SUQwaU9EQWlJRkp2ZFc1a1pXUWdQU0l3SWlCU1pVOXdaVzVsWkQwaU1TSWdVMkZtWlZKdmRXNWtaV1FnUFNJeU1DSWdiVzF6SVQwaUxURXhJaUJTWlZKdmRXNWtaV1FnUFNJeElpQnliM1ZrYldWemRISnZhMlV0ZDJsa2RHZzlJaklpTHo0OFptbHNiQ0I0UFNJeE1DSWdlVDBpT0RBaUlHTnNZWE56UFNKaVlYTmxJaUJqYUdsc1pDQTlJaU5qTkdOak1HRWlJRnB2Wlcwb0lpQTlJakkwSWlCZmJXbHVZV05hYkNBOUlqZ3dJaUJTYjNWdVpHVmtJRDBpTUNJZ1VtVlBjR1Z1WldRZ1BTSXhJaUJUWVdabFVtOTFibVJsWkNBOUlqRTJJaUJ0YlhNaFBTSXRNVEVpSUZKbFVtOTFibVJsWkNBOUlqRWlJSEp2ZFc1a2JXVnpkSEp2YTJVdGQybGtkR2c5SWpJaUx6NDhMME52YW05S1pYbG1jbUZ0WlQ0PSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --surface-color: #f8f9fa;
+            --text-color: #333;
+            --light-text: #777;
+            --border-color: #ddd;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--surface-color);
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+        
+        .tab {
+            padding: 12px 16px;
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: background-color 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--surface-color);
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .streak-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-bottom: 24px;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: var(--light-text);
+            padding: 4px 0;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            position: relative;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            color: var(--light-text);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .calendar-day.logged-creative {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .calendar-day.logged-workout {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .calendar-day.logged-both {
+            background: linear-gradient(135deg, var(--primary-color) 50%, var(--success-color) 50%);
+            color: white;
+        }
+        
+        .calendar-day.today {
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .calendar-day:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .streak-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stat-box h3 {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 8px;
+        }
+        
+        .stat-box .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-box:nth-child(2) .value {
+            color: var(--success-color);
+        }
+        
+        .button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .button.workout {
+            background-color: var(--success-color);
+        }
+        
+        .button.workout:hover {
+            background-color: #219653;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 24px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .modal h2 {
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        .button-group button {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .cancel-btn {
+            background-color: #f1f1f1;
+            color: var(--text-color);
+        }
+        
+        .save-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .history-list {
+            list-style: none;
+        }
+        
+        .history-item {
+            padding: 16px;
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .history-item .date {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 8px;
+        }
+        
+        .history-item .activity {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .history-item .duration {
+            font-size: 0.9rem;
+        }
+        
+        .creative {
+            color: var(--primary-color);
+        }
+        
+        .workout {
+            color: "white";
+        }
+        
+        .month-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .month-navigation button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        .month-year {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .no-data {
+            text-align: center;
+            color: var(--light-text);
+            padding: 32px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .install-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Habit Streak Tracker</h1>
+        <div class="settings-btn">⚙️</div>
+    </header>
+    
+    <div class="container">
+        <div class="tab-container">
+            <div class="tab active" data-tab="dashboard">Dashboard</div>
+            <div class="tab" data-tab="history">History</div>
+            <div class="tab" data-tab="stats">Stats</div>
+        </div>
+        
+        <div id="dashboard" class="tab-content active">
+            <div class="month-navigation">
+                <button id="prev-month">←</button>
+                <div class="month-year" id="month-year">May 2025</div>
+                <button id="next-month">→</button>
+            </div>
+            
+            <div class="streak-calendar" id="calendar">
+                <div class="calendar-header">S</div>
+                <div class="calendar-header">M</div>
+                <div class="calendar-header">T</div>
+                <div class="calendar-header">W</div>
+                <div class="calendar-header">T</div>
+                <div class="calendar-header">F</div>
+                <div class="calendar-header">S</div>
+                <!-- Calendar days will be populated with JavaScript -->
+            </div>
+            
+            <div class="streak-stats">
+                <div class="stat-box">
+                    <h3>Creative Streak</h3>
+                    <div class="value" id="creative-streak">0</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Workout Streak</h3>
+                    <div class="value" id="workout-streak">0</div>
+                </div>
+            </div>
+            
+            <button class="button" id="log-creative">Log Creative Session</button>
+            <button class="button workout" id="log-workout">Log Workout</button>
+            <button class="install-button" id="install-button">Install App</button>
+        </div>
+        
+        <div id="history" class="tab-content">
+            <ul class="history-list" id="history-list">
+                <!-- History items will be populated with JavaScript -->
+            </ul>
+            <div class="no-data" id="no-history">No activity logged yet</div>
+        </div>
+        
+        <div id="stats" class="tab-content">
+            <div class="streak-stats">
+                <div class="stat-box">
+                    <h3>Total Creative Sessions</h3>
+                    <div class="value" id="total-creative">0</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Total Workouts</h3>
+                    <div class="value" id="total-workout">0</div>
+                </div>
+            </div>
+            
+            <div class="streak-stats">
+                <div class="stat-box">
+                    <h3>Longest Creative Streak</h3>
+                    <div class="value" id="longest-creative">0</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Longest Workout Streak</h3>
+                    <div class="value" id="longest-workout">0</div>
+                </div>
+            </div>
+            
+            <div class="streak-stats">
+                <div class="stat-box">
+                    <h3>Average Creative Time</h3>
+                    <div class="value" id="avg-creative">0 min</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Average Workout Time</h3>
+                    <div class="value" id="avg-workout">0 min</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="create-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Log Creative Session</h2>
+            
+            <div class="form-group">
+                <label for="duration">Duration (minutes)</label>
+                <input type="number" id="duration" min="1" max="300" value="30">
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Notes (optional)</label>
+                <textarea id="notes" rows="3"></textarea>
+            </div>
+            
+            <div class="button-group">
+                <button class="cancel-btn" id="cancel-log">Cancel</button>
+                <button class="save-btn" id="save-log">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Service worker registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgKGV2ZW50KSA9PiB7CiAgICBldmVudC53YWl0VW50aWwoYXN5bmMgKCkgPT4gewogICAgICAgIGNvbnN0IGNhY2hlID0gYXdhaXQgY2FjaGVzLm9wZW4oJ3N0cmVha3RyYWNrZXItdjEnKTsKICAgICAgICB0cnkgewogICAgICAgICAgICBhd2FpdCBjYWNoZS5hZGQoJy4vaW5kZXguaHRtbCcpOwogICAgICAgIH0gY2F0Y2goZXJyKSB7CiAgICAgICAgICAgIGNvbnNvbGUuZXJyb3IoJ0NhY2hlIGluc3RhbGwgZmFpbGVkOicsIGVycik7CiAgICAgICAgfQogICAgfSk7Cn0pOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIChldmVudCkgPT4gewogICAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICAgICAgY2FjaGVzLm1hdGNoKGV2ZW50LnJlcXVlc3QpCiAgICAgICAgLnRoZW4oKHJlc3BvbnNlKSA9PiB7CiAgICAgICAgICAgIHJldHVybiByZXNwb25zZSB8fCBmZXRjaChldmVudC5yZXF1ZXN0KQogICAgICAgICAgICAudGhlbigocmVzcG9uc2UpID0+IHsKICAgICAgICAgICAgICAgIHJldHVybiBjYWNoZXMub3Blbignc3RyZWFrdHJhY2tlci12MScpCiAgICAgICAgICAgICAgICAudGhlbigoY2FjaGUpID0+IHsKICAgICAgICAgICAgICAgICAgICBjYWNoZS5wdXQoZXZlbnQucmVxdWVzdCwgcmVzcG9uc2UuY2xvbmUoKSk7CiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHJlc3BvbnNlOwogICAgICAgICAgICAgICAgfSk7CiAgICAgICAgICAgIH0pOwogICAgICAgIH0pCiAgICApOwp9KTsK')
+                    .then(() => console.log('Service Worker registered successfully'))
+                    .catch(error => console.log('Service Worker registration failed:', error));
+            });
+        }
+
+        // Main app code
+        document.addEventListener('DOMContentLoaded', function() {
+            // State
+            let activities = JSON.parse(localStorage.getItem('activities')) || [];
+            let currentActivityType = '';
+            let currentViewDate = new Date();
+            let deferredPrompt;
+            
+            // DOM Elements
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const calendar = document.getElementById('calendar');
+            const monthYearDisplay = document.getElementById('month-year');
+            const prevMonthBtn = document.getElementById('prev-month');
+            const nextMonthBtn = document.getElementById('next-month');
+            const logCreativeBtn = document.getElementById('log-creative');
+            const logWorkoutBtn = document.getElementById('log-workout');
+            const createModal = document.getElementById('create-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const durationInput = document.getElementById('duration');
+            const notesInput = document.getElementById('notes');
+            const cancelLogBtn = document.getElementById('cancel-log');
+            const saveLogBtn = document.getElementById('save-log');
+            const historyList = document.getElementById('history-list');
+            const noHistoryMsg = document.getElementById('no-history');
+            const installButton = document.getElementById('install-button');
+            
+            // Stats
+            const creativeStreakEl = document.getElementById('creative-streak');
+            const workoutStreakEl = document.getElementById('workout-streak');
+            const totalCreativeEl = document.getElementById('total-creative');
+            const totalWorkoutEl = document.getElementById('total-workout');
+            const longestCreativeEl = document.getElementById('longest-creative');
+            const longestWorkoutEl = document.getElementById('longest-workout');
+            const avgCreativeEl = document.getElementById('avg-creative');
+            const avgWorkoutEl = document.getElementById('avg-workout');
+            
+            // Tab Navigation
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    if (tabId === 'history') {
+                        renderHistory();
+                    } else if (tabId === 'stats') {
+                        updateStats();
+                    }
+                });
+            });
+            
+            // Calendar Functions
+            function renderCalendar() {
+                // Clear existing calendar days (except headers)
+                const headers = document.querySelectorAll('.calendar-header');
+                while (calendar.children.length > headers.length) {
+                    calendar.removeChild(calendar.lastChild);
+                }
+                
+                // Month navigation
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                monthYearDisplay.textContent = `${monthNames[currentViewDate.getMonth()]} ${currentViewDate.getFullYear()}`;
+                
+                // First day of month and number of days
+                const firstDay = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth(), 1);
+                const lastDay = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth() + 1, 0);
+                
+                // Add empty cells for days before the first day of month
+                let startDayIndex = firstDay.getDay(); // 0 = Sunday, 1 = Monday, etc.
+                for (let i = 0; i < startDayIndex; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.classList.add('calendar-day', 'empty');
+                    calendar.appendChild(emptyDay);
+                }
+                
+                // Add days of the month
+                const today = new Date();
+                for (let day = 1; day <= lastDay.getDate(); day++) {
+                    const dayEl = document.createElement('div');
+                    dayEl.classList.add('calendar-day');
+                    dayEl.textContent = day;
+                    
+                    const currentDate = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth(), day);
+                    
+                    // Check if this date is today
+                    if (currentDate.toDateString() === today.toDateString()) {
+                        dayEl.classList.add('today');
+                    }
+                    
+                    // Check if there's activity logged for this date
+                    const dateStr = formatDate(currentDate);
+                    const hasCreative = activities.some(a => a.type === 'creative' && a.date === dateStr);
+                    const hasWorkout = activities.some(a => a.type === 'workout' && a.date === dateStr);
+                    
+                    if (hasCreative && hasWorkout) {
+                        dayEl.classList.add('logged-both');
+                    } else if (hasCreative) {
+                        dayEl.classList.add('logged-creative');
+                    } else if (hasWorkout) {
+                        dayEl.classList.add('logged-workout');
+                    }
+                    
+                    // Add click event to show/add activities for this day
+                    dayEl.addEventListener('click', () => {
+                        console.log(`Clicked on ${dateStr}`);
+                        // Future enhancement: Show activities for this date or allow adding
+                    });
+                    
+                    calendar.appendChild(dayEl);
+                }
+            }
+            
+            // Month navigation
+            prevMonthBtn.addEventListener('click', () => {
+                currentViewDate = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth() - 1, 1);
+                renderCalendar();
+            });
+            
+            nextMonthBtn.addEventListener('click', () => {
+                currentViewDate = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth() + 1, 1);
+                renderCalendar();
+            });
+            
+            // Activity logging
+            logCreativeBtn.addEventListener('click', () => {
+                modalTitle.textContent = 'Log Creative Session';
+                currentActivityType = 'creative';
+                durationInput.value = '30';
+                notesInput.value = '';
+                createModal.style.display = 'flex';
+            });
+            
+            logWorkoutBtn.addEventListener('click', () => {
+                modalTitle.textContent = 'Log Workout';
+                currentActivityType = 'workout';
+                durationInput.value = '30';
+                notesInput.value = '';
+                createModal.style.display = 'flex';
+            });
+            
+            // Modal actions
+            cancelLogBtn.addEventListener('click', () => {
+                createModal.style.display = 'none';
+            });
+            
+            saveLogBtn.addEventListener('click', () => {
+                const duration = parseInt(durationInput.value) || 0;
+                const notes = notesInput.value.trim();
+                
+                if (duration <= 0) {
+                    alert('Please enter a valid duration');
+                    return;
+                }
+                
+                const now = new Date();
+                const activity = {
+                    id: Date.now(),
+                    type: currentActivityType,
+                    date: formatDate(now),
+                    timestamp: now.getTime(),
+                    duration: duration,
+                    notes: notes
+                };
+                
+                activities.push(activity);
+                saveActivities();
+                
+                createModal.style.display = 'none';
+                renderCalendar();
+                updateStreaks();
+                
+                // Switch to history tab if we're logging a past activity later
+                if (tabs[0].classList.contains('active')) {
+                    // We're on the dashboard, no need to switch
+                } else {
+                    tabs[0].click(); // Go to dashboard
+                }
+            });
+            
+            // History view
+            function renderHistory() {
+                if (activities.length === 0) {
+                    historyList.style.display = 'none';
+                    noHistoryMsg.style.display = 'block';
+                    return;
+                }
+                
+                historyList.style.display = 'block';
+                noHistoryMsg.style.display = 'none';
+                
+                // Clear current list
+                historyList.innerHTML = '';
+                
+                // Sort activities by timestamp (newest first)
+                const sortedActivities = [...activities].sort((a, b) => b.timestamp - a.timestamp);
+                
+                sortedActivities.forEach(activity => {
+                    const item = document.createElement('li');
+                    item.classList.add('history-item');
+                    
+                    const activityDate = new Date(activity.timestamp);
+                    const dateStr = activityDate.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    
+                    const timeStr = activityDate.toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    item.innerHTML = `
+                        <div class="date">${dateStr} at ${timeStr}</div>
+                        <div class="activity ${activity.type}">${activity.type === 'creative' ? 'Creative Session' : 'Workout'}</div>
+                        <div class="duration">${activity.duration} minutes</div>
+                        ${activity.notes ? `<div class="notes">${activity.notes}</div>` : ''}
+                    `;
+                    
+                    historyList.appendChild(item);
+                });
+            }
+            
+            // Statistics
+            function updateStats() {
+                const creativeActivities = activities.filter(a => a.type === 'creative');
+                const workoutActivities = activities.filter(a => a.type === 'workout');
+                
+                // Total counts
+                totalCreativeEl.textContent = creativeActivities.length;
+                totalWorkoutEl.textContent = workoutActivities.length;
+                
+                // Longest streaks
+                longestCreativeEl.textContent = calculateLongestStreak('creative');
+                longestWorkoutEl.textContent = calculateLongestStreak('workout');
+                
+                // Average durations
+                if (creativeActivities.length > 0) {
+                    const avgCreative = creativeActivities.reduce((sum, a) => sum + a.duration, 0) / creativeActivities.length;
+                    avgCreativeEl.textContent = Math.round(avgCreative) + ' min';
+                }
+                
+                if (workoutActivities.length > 0) {
+                    const avgWorkout = workoutActivities.reduce((sum, a) => sum + a.duration, 0) / workoutActivities.length;
+                    avgWorkoutEl.textContent = Math.round(avgWorkout) + ' min';
+                }
+            }
+            
+            // Calculate current streaks
+            function updateStreaks() {
+                creativeStreakEl.textContent = calculateCurrentStreak('creative');
+                workoutStreakEl.textContent = calculateCurrentStreak('workout');
+            }
+            
+            function calculateCurrentStreak(type) {
+                const today = new Date();
+                const todayStr = formatDate(today);
+                
+                // Filter activities by type
+                const filteredActivities = activities.filter(a => a.type === type);
+                
+                // Sort by date (newest first)
+                filteredActivities.sort((a, b) => {
+                    return new Date(b.date) - new Date(a.date);
+                });
+                
+                // If there are no activities or the newest one isn't today/yesterday, streak is 0
+                if (filteredActivities.length === 0) {
+                    return 0;
+                }
+                
+                const lastActivityDate = new Date(filteredActivities[0].date);
+                const diffDays = Math.floor((today - lastActivityDate) / (1000 * 60 * 60 * 24));
+                
+                // If the last activity was more than 1 day ago, streak is broken
+                if (diffDays > 1) {
+                    return 0;
+                }
+                
+                // Start counting streak
+                let streak = 1;
+                let currentDate = new Date(filteredActivities[0].date);
+                
+                for (let i = 1; i < filteredActivities.length; i++) {
+                    const prevDate = new Date(filteredActivities[i].date);
+                    
+                    // Calculate difference in days
+                    const timeDiff = currentDate - prevDate;
+                    const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                    if (dayDiff === 1) {
+                        // Consecutive day
+                        streak++;
+                        currentDate = prevDate;
+                    } else if (dayDiff === 0) {
+                        // Same day, don't count extra
+                        currentDate = prevDate;
+                    } else {
+                        // Gap found, stop counting
+                        break;
+                    }
+                }
+                
+                return streak;
+            }
+            
+            function calculateLongestStreak(type) {
+                // Filter activities by type
+                const filteredActivities = activities.filter(a => a.type === type);
+                
+                if (filteredActivities.length === 0) {
+                    return 0;
+                }
+                
+                // Create array of unique dates
+                const uniqueDates = [...new Set(filteredActivities.map(a => a.date))].sort();
+                
+                let currentStreak = 1;
+                let longestStreak = 1;
+                
+                for (let i = 1; i < uniqueDates.length; i++) {
+                    const currentDate = new Date(uniqueDates[i]);
+                    const prevDate = new Date(uniqueDates[i - 1]);
+                    
+                    // Calculate difference in days
+                    const timeDiff = currentDate - prevDate;
+                    const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                    if (dayDiff === 1) {
+                        // Consecutive day
+                        currentStreak++;
+                        longestStreak = Math.max(longestStreak, currentStreak);
+                    } else {
+                        // Gap found, reset current streak
+                        currentStreak = 1;
+                    }
+                }
+                
+                return longestStreak;
+            }
+            
+            // Utility Functions
+            function formatDate(date) {
+                return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+            }
+            
+            function saveActivities() {
+                localStorage.setItem('activities', JSON.stringify(activities));
+            }
+            
+            // Install PWA
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // Prevent Chrome 67 and earlier from automatically showing the prompt
+                e.preventDefault();
+                // Stash the event so it can be triggered later
+                deferredPrompt = e;
+                // Show the install button
+                installButton.style.display = 'block';
+            });
+            
+            installButton.addEventListener('click', () => {
+                // Hide the install button
+                installButton.style.display = 'none';
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+            
+            // Initial Render
+            renderCalendar();
+            updateStreaks();
+            updateStats();
+        });
+    </script>
+</body>
+</html>
